@@ -3,4 +3,4 @@ Build a knowledge graph integrating cancer genomics data to identify potential b
 
 # Flowchart
 
-![Overview diagram](Flow chart scratch work.png)
+![Overview diagram](initial_flow_chart.png)
