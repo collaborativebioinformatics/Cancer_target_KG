@@ -4,3 +4,7 @@ Build a knowledge graph integrating cancer genomics data to identify potential b
 # Flowchart
 
 ![Overview diagram](initial_flow_chart.png)
+
+# Brainstorming Knowledge Graph Schema
+
+![Overview diagram](draft_knowledge_graph_scheme.png)
