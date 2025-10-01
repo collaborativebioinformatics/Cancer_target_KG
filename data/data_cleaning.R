@@ -26,7 +26,8 @@ metadata_coad <-  metadata[metadata$bcr_patient_barcode %in% ids_in_all,]
 mutations_coad<- mutations[mutations$patient_id %in% ids_in_all,]
 subtype_coad <- subtype_coad[subtype_coad$pan.samplesID %in% ids_in_all,]
 
+mutations_coad <- mutations_coad[, -which(names(mutations_coad) == "type")]
 #download data
-write.csv(metadata_coad, "cleaned_metadata.csv")
-write.csv(mutations_coad, "cleaned_mut_data.csv")
-write.csv(subtype_coad, "cleaned_subtype_data.csv")
+write.csv(metadata_coad, "coad_metadata.csv", quote = FALSE, row.names = FALSE)
+write.csv(mutations_coad, "coad_mut_data.csv", quote = FALSE, row.names = FALSE)
+write.csv(subtype_coad, "coad_subtype_data.csv", quote = FALSE, row.names = FALSE)
