@@ -112,7 +112,7 @@ survfit2(Surv(OS.time, as.numeric(vital_status))~gender,data=meta_tibble) |>
   add_confidence_interval("lines") + # add confidence interval
   add_quantile(y_value = 0.5, color = "gray50", linewidth = 0.75)+  # Specify median survival
   labs(title = "Survival Probability by Gender",
-       x="Time (Months)",
+       x="Time (Days)",
        color="Gender")+
   add_pvalue("annotation") +  
   scale_color_manual(values = c("#6CE5E8", "#31356E"))+
@@ -187,7 +187,7 @@ survfit2(Surv(OS.time, as.numeric(vital_status))~older_than_50,data=meta_tibble)
   add_confidence_interval("lines") + # add confidence interval
   add_quantile(y_value = 0.5, color = "gray50", linewidth = 0.75)+  # Specify median survival
   labs(title = "Survival Probability by Age Group",
-       x="Time (Months)",
+       x="Time (Days)",
        color="Age")+
   add_pvalue("annotation") +  
   scale_color_manual(values = c("#6CE5E8", "#31356E"))+
