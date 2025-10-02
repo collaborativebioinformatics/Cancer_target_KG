@@ -1,4 +1,4 @@
-# ECoKG
+# ECoGraph
 ### A Knowledge Graph for understanding early onset colorectal cancer
 
 ## Overview
