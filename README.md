@@ -11,7 +11,7 @@ Our analysis strategy involves three key steps:
 2. Cross-Platform Validation: Test how well the TCGA-derived model performs when applied to CPTAC data
 3. Model Enhancement: Expand the model in CPTAC by incorporating both the original genetic markers and CPTAC's proteomic data to assess whether protein-level information improves predictive accuracy
 
-We perform survival analysis stratified by age groups (≤50 vs >50 years old) and report hazard ratios with 95% confidence intervals to identify age-specific biomarkers and therapeutic targets.
+We perform survival analysis stratified by age groups (≤50 vs >50 years old) and interaction with gene mutated status and report hazard ratios and their corresponding significance to identify age-specific biomarkers and therapeutic targets.
 
 ## Knowledge Graph Construction
 The primary goal of this project is to construct a comprehensive knowledge graph that captures relationships between genes, mutations, proteins, clinical outcomes, and patient characteristics. The repository documents our methodology for determining which entities should be represented as nodes and which relationships should be represented as edges in the graph structure.
@@ -28,13 +28,13 @@ See the flowchart and schema diagrams in this repository for a visual overview o
 ![Overview diagram](draft_knowledge_graph_schema.png)
 
 ## Methods
-We built a knowledge graph to understand the drivers of colorectal cancer in younger age groups. Our approach integrates genetic markers, proteomic data, clinical outcomes, and patient characteristics to identify and validate potential therapeutic targets while accounting for the demographic and molecular heterogeneity of colorectal cancer.
+We built a knowledge graph to understand the drivers of colorectal cancer in younger age groups. Our approach integrates genetic markers, proteomic data, clinical outcomes, and patient characteristics to identify and validate potential therapeutic targets while accounting for the demographic and molecular heterogeneity of colorectal cancer. The data has been downloaded from [GDC](https://gdc.cancer.gov/about-data/publications/pancanatlas) corresponding to pancan TCGA publications 
 
 ### Knowledge Graph Schema
 The knowledge graph nodes include gene attributes defined by hazard ratio (HR) and mutation frequency, along with a network of pathways to which each gene belongs. Nodes also consist of various clinical metadata including gender, histological subtype, stage, genomic subtype, and age group (≤50 vs >50 years old).
 
 ### TCGA Survival Analysis
-Age was stratified into two groups (≤50 and >50 years old), and hazard ratios were calculated for each age subtype with respect to gene mutation status via Cox proportional hazards models. Hazard ratios were interpreted as explaining the association of survival with respect to mutation status in younger versus older age groups. HRs were calculated by fitting a Cox proportional hazards model with gene mutation status predicting overall survival. For example, HR > 1 for gene A in the group of samples with age ≤50 indicated that a mutation in gene A was associated with worse prognosis (increased mortality risk).
+Age was stratified into two groups (≤50 and >50 years old), and hazard ratios were calculated for each age subtype and its interaction with gene mutation status via Cox proportional hazards models. Hazard ratios were interpreted as explaining the association of survival with respect to mutation status in in older age groups vs WT status of the same gene in younger patients. HRs were calculated by fitting a Cox proportional hazards model with age group (≤50 vs >50 years old) and gene mutation status predicting overall survival. For example, HR > 1 for gene A indicates that >50 age group carrying that mutation showed worse prognosis (increased mortality risk) as compared to those not carrying the mutation in the <=50 age group. 
 
 Genes with mutation frequency lower than 2% were dropped from the analysis set. We were particularly interested in identifying genes that exhibit differing HRs between age groups (≤50 vs >50 years old), as these may represent age-specific therapeutic targets.
 
