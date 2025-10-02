@@ -24,4 +24,4 @@ See the flowchart and schema diagrams in this repository for a visual overview o
 
 # Brainstorming Knowledge Graph Schema
 
-![Overview diagram](draft_knowledge_graph_scheme.png)
+![Overview diagram](draft_knowledge_graph_schema.png)
