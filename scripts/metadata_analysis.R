@@ -226,3 +226,29 @@ ggsurvfit(fit_KM, linewidth = 1, color = "#31356E") +
         axis.title = element_text(size = 13),
         axis.text = element_text(size = 12),
         legend.text = element_text(size = 13))
+
+
+#--- Histological Type ----
+meta_tibble_hist_type <- meta_tibble[which(meta_tibble$histological_type != "[Not Available]" & meta_tibble$histological_type != "[Discrepancy]"),]
+survfit2(Surv(OS.time, as.numeric(vital_status))~histological_type,data=meta_tibble_hist_type) |>
+  ggsurvfit(linewidth = 1) +
+  add_censor_mark() +
+  add_confidence_interval("lines") + # add confidence interval
+  add_quantile(y_value = 0.5, color = "gray50", linewidth = 0.75)+  # Specify median survival
+  labs(title = "Survival Probability by Histological Type",
+       x="Time (Days)",
+       color="Type")+
+  add_pvalue("annotation") +  
+  scale_color_manual(values = c("#6CE5E8", "#31356E"))+
+  scale_fill_manual(values = c("#6CE5E8", "#31356E")) +
+  theme(plot.title = element_text(hjust = 0.5, size = 18), 
+        plot.background = element_rect(fill = "#F2F4F5"),
+        panel.border = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.background = element_rect(fill = "#F2F4F5"),
+        legend.background = element_rect(fill = "#F2F4F5"),
+        legend.title = element_text(hjust = 0.5, size = 13),
+        legend.position = "right",
+        axis.title = element_text(size = 13),
+        axis.text = element_text(size = 12),
+        legend.text = element_text(size = 13))
