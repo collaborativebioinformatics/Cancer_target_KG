@@ -25,3 +25,20 @@ See the flowchart and schema diagrams in this repository for a visual overview o
 # Brainstorming Knowledge Graph Schema
 
 ![Overview diagram](draft_knowledge_graph_schema.png)
+
+## Methods
+We built a knowledge graph to understand the drivers of colorectal cancer in younger age groups. Our approach integrates genetic markers, proteomic data, clinical outcomes, and patient characteristics to identify and validate potential therapeutic targets while accounting for the demographic and molecular heterogeneity of colorectal cancer.
+
+### Knowledge Graph Schema
+The knowledge graph nodes include gene attributes defined by hazard ratio (HR) and mutation frequency, along with a network of pathways to which each gene belongs. Nodes also consist of various clinical metadata including gender, histological subtype, stage, genomic subtype, and age group (≤50 vs >50 years old).
+
+### TCGA Survival Analysis
+Age was stratified into two groups (≤50 and >50 years old), and hazard ratios were calculated for each age subtype with respect to gene mutation status via Cox proportional hazards models. Hazard ratios were interpreted as explaining the association of survival with respect to mutation status in younger versus older age groups. HRs were calculated by fitting a Cox proportional hazards model with gene mutation status predicting overall survival. For example, HR > 1 for gene A in the group of samples with age ≤50 indicated that a mutation in gene A was associated with worse prognosis (increased mortality risk).
+
+Genes were filtered on the basis of their mutation frequency after removing [PLACEHOLDER: filtering criteria to be determined]. We were particularly interested in identifying genes that exhibit differing HRs between age groups (≤50 vs >50 years old), as these may represent age-specific therapeutic targets.
+
+### CPTAC Validation and Enhancement
+We validated the TCGA-derived survival model in the independent CPTAC cohort using the same Cox proportional hazards modeling approach. Additionally, we constructed an enhanced model in CPTAC that incorporates both genetic markers and proteomic data to assess whether protein-level information improves survival prediction beyond genetic mutations alone.
+
+### Statistical Reporting
+We report hazard ratios and 95% confidence intervals for all identified markers. The proportional hazards assumption was tested using standard diagnostics. Survival curves were visualized using Kaplan-Meier plots with separate lines for young versus old age groups. All findings are presented within the knowledge graph framework that captures the complex relationships between genes, proteins, mutations, clinical outcomes, and patient characteristics. All analysis was performed using R statistical software (vX.X.X) and the tidyverse (vX.X.X.) and survival (vX.X.X.) packages.
