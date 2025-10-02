@@ -1,0 +1,46 @@
+---
+title: "subset_mutation_by_age"
+author: "Kara Quaid"
+date: "2025-10-02"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+meta <- read.csv("coad_metadata.csv")%>%as_tibble()
+mut <- read.csv("coad_mut_data.csv")%>%as_tibble()
+```
+
+
+```{r}
+meta$agesplit <- rep("over50",nrow(meta))
+meta$agesplit[meta$age_at_initial_pathologic_diagnosis<=50] <-"50andUnder"
+Hmisc::describe(meta$agesplit)
+```
+
+```{r}
+over50_ids <- meta$bcr_patient_barcode[which(meta$agesplit=="over50")]
+under50_ids <- meta$bcr_patient_barcode[meta$agesplit=="50andUnder"]
+```
+
+```{r}
+mut$patient_barcode <- substr(mut$Tumor_Sample_Barcode, 1, 12) #first 12 characters
+older_subset <- mut[mut$patient_barcode %in% over50_ids,]
+younger_subset <- mut[mut$patient_barcode %in% under50_ids,]
+older_subset <- older_subset %>% select(-patient_barcode)
+younger_subset <- younger_subset %>% select(-patient_barcode)
+```
+
+```{r}
+write.table(older_subset,"older_subset_coad_mut_data.csv",row.names = FALSE,quote=FALSE)
+write.table(younger_subset,"younger_subset_coad_mut_data.csv",row.names = FALSE,quote=FALSE)
+```
+
+
+
+
+
+
