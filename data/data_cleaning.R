@@ -33,6 +33,6 @@ metadata_coad <- metadata_coad[, -which(names(metadata_coad) %in%
                                   "residual_tumor","new_tumor_event_site","new_tumor_event_site_other",
                                   "cause_of_death", "new_tumor_event_type"))]
 #download data
-write.csv(metadata_coad, "coad_metadata.csv", quote = FALSE, row.names = FALSE)
+write.csv(metadata_coad, "coad_metadata.csv", row.names = FALSE)
 write.csv(mutations_coad, "coad_mut_data.csv", quote = FALSE, row.names = FALSE)
 write.csv(subtype_coad, "coad_subtype_data.csv", quote = FALSE, row.names = FALSE)
