@@ -1,5 +1,5 @@
 # ECoKG
-###A Knowledge Graph for understanding early onset colorectal cancer
+### A Knowledge Graph for understanding early onset colorectal cancer
 
 ## Overview
 This project builds a knowledge graph integrating cancer genomics data to identify potential biomarkers and therapeutic targets. We focus on colorectal adenocarcinoma (COAD) because it is well-represented in both TCGA (The Cancer Genome Atlas) and CPTAC (Clinical Proteomic Tumor Analysis Consortium) datasets, enabling cross-platform validation.
