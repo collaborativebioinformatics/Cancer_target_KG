@@ -42,3 +42,7 @@ We validated the TCGA-derived survival model in the independent CPTAC cohort usi
 
 ### Statistical Reporting
 We report hazard ratios and 95% confidence intervals for all identified markers. The proportional hazards assumption was tested using standard diagnostics. Survival curves were visualized using Kaplan-Meier plots with separate lines for young versus old age groups. All findings are presented within the knowledge graph framework that captures the complex relationships between genes, proteins, mutations, clinical outcomes, and patient characteristics. All analysis was performed using R statistical software and the tidyverse and survival packages.
+
+# HOW TO RUN THIS PROGRAM
+
+Add code in triple-backticks so that a new user accessing this repo knows what to do with it (e.g., how to I clone the GitHub repo, how to install, requirements/dependencies, example queries, how do I apply it to my own data set, etc.). Check out GeNETwork's repo!!
