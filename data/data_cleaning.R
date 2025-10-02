@@ -6,6 +6,7 @@ metadata <- read_xlsx("TCGA-CDR-SupplementalTableS1.xlsx")
 subtype_data <- read.table("TCGASubtype.20170308.tsv", sep = "\t", header = TRUE)
 
 #intersection of samples with metadata and mutation
+#NO LONGER DOING
 ids_w_muts <- unlist(lapply(mutations$Tumor_Sample_Barcode, function(x) substr(x, 1, 12)))
 ids_in_both <- intersect(metadata$bcr_patient_barcode, ids_w_muts)
 
@@ -21,10 +22,10 @@ metadata_coad <- metadata[which(metadata$type=="COAD"),]
 subtype_coad <- subtype_data[which(subtype_data$cancer.type=="COAD"),]
 
 #intersect with subtype
-ids_in_all <-intersect(metadata$bcr_patient_barcode, subtype_coad$pan.samplesID)
-metadata_coad <-  metadata[metadata$bcr_patient_barcode %in% ids_in_all,]
-mutations_coad<- mutations[mutations$patient_id %in% ids_in_all,]
-subtype_coad <- subtype_coad[subtype_coad$pan.samplesID %in% ids_in_all,]
+#ids_in_all <-intersect(metadata$bcr_patient_barcode, subtype_coad$pan.samplesID)
+#metadata_coad <-  metadata[metadata$bcr_patient_barcode %in% ids_in_all,]
+#mutations_coad<- mutations[mutations$patient_id %in% ids_in_all,]
+#subtype_coad <- subtype_coad[subtype_coad$pan.samplesID %in% ids_in_all,]
 
 mutations_coad <- mutations_coad[, -which(names(mutations_coad) == "type")]
 #download data
