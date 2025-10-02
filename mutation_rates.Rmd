@@ -1,0 +1,41 @@
+---
+title: "Mutation Rates"
+author: "Kara Quaid"
+date: "2025-10-01"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+mut <- read.csv("coad_mut_data.csv")%>%as_tibble()
+mut
+```
+
+
+```{r}
+#For each column, take sum divided by nrow for mutation rates
+gene_cols <- Filter(is.numeric, mut)
+Frequency <- colSums(gene_cols)/nrow(mut)
+Gene <- colnames(gene_cols)
+```
+
+
+```{r}
+mut_rates <- cbind.data.frame(Gene,Frequency)
+mut_rates
+```
+
+
+```{r}
+write.table(mut_rates,"coad_mutation_rates.csv",sep=",",row.names = FALSE,quote=FALSE,col.names = TRUE)
+```
+
+```{r}
+test <- read.csv("coad_mutation_rates.csv")
+```
+
+
+
