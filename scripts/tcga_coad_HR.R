@@ -1,11 +1,19 @@
 # This script is to perform a survival analysis on colorectal cancer data from TCGA data.
-# It will start by reading in the data using tidyverse principles, which is already cleaned,
-#then using the survival# package to perform the analysis.
-# We will define different models for young vs. old age groups (<= 50 and > 50 years old).
-# When this is finished, we will run the same models in CPTAC data to see if the results
-# are consistent.
-# Additionally, we will expand the model within the CPTAC data to include proteomic markers.
-# Then, we will compare this expanded model's results to the TCGA-model results.
+
+library(tidyr)
+library(dplyr)
+
+coad_maf <- read.csv(file="data/coad_mut_data.csv")
+coad_clin <- read.csv(file="data/coad_metadata.csv") %>%
+  dplyr::select(-`...1`)
+
+coad_clin <- coad_clin %>%
+  mutate(age_bin = case_when(age_at_initial_pathologic_diagnosis <= 50 ~ 1, 
+                             age_at_initial_pathologic_diagnosis > 50 ~ 0, 
+                             TRUE ~ NA))
+
+write.csv(coad_clin, file="data/coad_metadata.csv", row.names = FALSE)
+
 
 # Read in colorectal cancer data from TCGA
 
