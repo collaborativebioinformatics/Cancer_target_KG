@@ -11,7 +11,11 @@ library(tidyverse)
 
 ```{r}
 mut <- read.csv("coad_mut_data.csv")%>%as_tibble()
+old_mut <- read.csv("older_subset_coad_mut_data.csv")%>%as_tibble()
+young_mut <- read.csv("younger_subset_coad_mut_data.csv")%>%as_tibble()
 mut
+old_mut
+young_mut
 ```
 
 
@@ -28,14 +32,66 @@ mut_rates <- cbind.data.frame(Gene,Frequency)
 mut_rates
 ```
 
+```{r}
+#For each column, take sum divided by nrow for mutation rates
+gene_cols <- Filter(is.numeric, old_mut)
+Frequency <- colSums(gene_cols)/nrow(old_mut)
+Gene <- colnames(gene_cols)
+```
+
+
+```{r}
+old_mut_rates <- cbind.data.frame(Gene,Frequency)
+old_mut_rates
+```
+
+```{r}
+#For each column, take sum divided by nrow for mutation rates
+gene_cols <- Filter(is.numeric, young_mut)
+Frequency <- colSums(gene_cols)/nrow(young_mut)
+Gene <- colnames(gene_cols)
+```
+
+
+```{r}
+young_mut_rates <- cbind.data.frame(Gene,Frequency)
+young_mut_rates
+```
+
 
 ```{r}
 write.table(mut_rates,"coad_mutation_rates.csv",sep=",",row.names = FALSE,quote=FALSE,col.names = TRUE)
+write.table(old_mut_rates,"older_subset_coad_mutation_rates.csv",sep=",",row.names = FALSE,quote=FALSE,col.names = TRUE)
+write.table(young_mut_rates,"younger_subset_coad_mutation_rates.csv",sep=",",row.names = FALSE,quote=FALSE,col.names = TRUE)
 ```
 
 ```{r}
-test <- read.csv("coad_mutation_rates.csv")
+test <- read.csv("younger_subset_coad_mutation_rates.csv")
 ```
+
+
+
+```{r}
+mutation_rates <- cbind.data.frame(old_mut_rates$Gene,old_mut_rates$Frequency,young_mut_rates$Frequency)
+
+
+colnames(mutation_rates) <- c("Gene","Older","Younger")
+```
+
+```{r}
+library(grDevices)
+forHeatmap <- cbind.data.frame(mutation_rates$Older,mutation_rates$Younger)
+my_colors <- colorRampPalette(c("lightblue", "red"))
+color_vector <- my_colors(11)
+row.names(forHeatmap) <- mutation_rates$Gene
+colnames(forHeatmap) <- c("Older","Younger")
+filtered_df_base <- forHeatmap[abs(forHeatmap$Older -forHeatmap$Younger)>0.085, ]
+color_breaks <- seq(0, 1, length.out = 11)
+pheatmap(filtered_df_base,breaks=color_breaks,color=color_vector,cellwidth=20,cellheight=)
+```
+
+
+
 
 
 
