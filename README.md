@@ -18,6 +18,8 @@ The primary goal of this project is to construct a comprehensive knowledge graph
 Getting Started
 
 See the flowchart and schema diagrams in this repository for a visual overview of the project workflow and knowledge graph design.
+<img width="608" height="413" alt="image" src="https://github.com/user-attachments/assets/1bd1d1ab-b869-47b6-82fc-70566f6fb5a2" />
+
 
 # Flowchart
 
