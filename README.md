@@ -46,4 +46,142 @@ We report hazard ratios and 95% confidence intervals for all identified markers.
 
 # HOW TO RUN THIS PROGRAM
 
-Add code in triple-backticks so that a new user accessing this repo knows what to do with it (e.g., how to I clone the GitHub repo, how to install, requirements/dependencies, example queries, how do I apply it to my own data set, etc.). Check out GeNETwork's repo!!
+## Quick Start
+
+### Prerequisites
+
+* Conda package manager (your new best friend)
+* ~10–15 GB free disk space (yes, cancer data is hefty)
+
+### Environment Setup
+We've prepared two conda environments for you. Think of them as "comfort" vs. "precision" modes:
+
+### Option A: Full environment (comfort; recommended for first-timers)
+```
+conda env create -f scripts/conda_environment_full.yml && conda activate base
+```
+
+### Option B: Minimal environment (precision; for the brave and disk-space-conscious)
+```
+conda env create -f scripts/conda_environment.yml && conda activate base
+```
+
+The full environment has every dependency pinned to exact versions—perfect for "but it worked on my machine!" situations. The minimal environment is lighter and gives you more wiggle room with package versions.
+
+### Verify Installation
+Let's make sure everything installed correctly (crossing fingers optional):
+
+```
+bedtools --version   # ~2.26.0
+bcftools --version   # ~1.20
+htslib --version     # ~1.20
+R --version          # 4.3.x
+```
+
+If these commands work, congratulations! You're officially ready to wrangle some genomic data.
+
+### Understanding the Data
+All processed data files live in the data/ directory. Here's what you'll find there (and what it all means):
+
+### Main Analysis Files:
+
+```
+coad_metadata.csv – Clinical metadata for TCGA colorectal adenocarcinoma (COAD) samples. This is where patient demographics, survival outcomes, and clinical characteristics live.
+coad_mut_data.csv – The cleaned, analysis-ready mutation data for COAD samples. Start here for your survival analysis!
+coad_mutation_rates.csv – Mutation rate summaries across samples.
+coad_subtype_data.csv – Molecular subtype classifications for COAD samples.
+```
+
+### Age-Stratified Subsets (because age matters in cancer):
+
+```
+younger_subset_coad_mut_data.csv – Mutation data for patients ≤50 years old
+younger_subset_coad_mutation_rates.csv – Mutation rates for the younger cohort
+older_subset_coad_mut_data.csv – Mutation data for patients >50 years old
+older_subset_coad_mutation_rates.csv – Mutation rates for the older cohort
+```
+
+### Reference Files:
+
+```
+clinically_sig_genes.csv – Genes flagged as clinically significant (spoiler: these are the ones you probably care about)
+gene_0.02thr_HR_pval.csv – Genes with hazard ratios and p-values meeting statistical thresholds
+human_canonical_pways.csv – Canonical biological pathways for functional enrichment
+```
+
+### ClinVar Integration:
+
+```
+tcga_clinvar_maf.csv – Intersection of TCGA mutations with ClinVar pathogenic variants
+```
+
+### Supplementary Files:
+
+```
+TCGA-CDR-SupplementalTableS1.xlsx – TCGA Clinical Data Resource table
+TCGASubtype.20170308.tsv – TCGA PanCanAtlas subtype classifications
+data_cleaning.R – The R script that transformed raw data into the clean files above (peek inside if you're curious about our methods!)
+```
+
+### Running the Analysis
+With your environment activated and data files ready to go, you're all set! The main analysis workflow starts with the cleaned COAD mutation and metadata files. Check out `tcga_survival_analysis_pseudocode.R` for guidance on the survival analysis pipeline, which will:
+
+1. Merge mutation data with clinical metadata
+2. Stratify patients by age (≤50 vs. >50 years)
+3. Run Cox proportional hazards models
+4. Generate those beautiful Kaplan-Meier curves we all love
+
+For knowledge graph construction and further analyses, consult the individual script documentation.
+
+### Notes for the Road
+
+- **Cloud deployment:** This pipeline plays nicely with Amazon Linux and Conda. All the bioinformatics tools (bcftools, bedtools, htslib, tabix) come bundled in the conda environment—no hunting for dependencies required!
+- **Storage:** Keep ~10–15 GB free during analysis runs. Your hard drive will thank you.
+- **Questions?** The data files are pre-processed and ready for analysis using the GRCh37 reference genome. If something seems off, check the commit messages in the repo—we've been busy debugging and refining!
+
+Now go forth and discover some biomarkers! 🧬
+
+
+# Repository Structure
+
+```
+Cancer_target_KG/
+│
+├── README.md                              # You are here!
+├── LICENSE                                # MIT License
+├── initial_flow_chart.png                 # Project workflow overview
+├── draft_knowledge_graph_scheme.png       # KG schema diagram
+│
+├── scripts/                               # Analysis and pipeline scripts
+│   ├── conda_environment.yml              # Minimal conda environment
+│   ├── conda_environment_full.yml         # Full pinned environment (recommended)
+│   ├── 1.generate_mc3_bed.sh              # MAF → BED conversion
+│   ├── 2.clinvar_pos_in_mc3_allvcf.sh     # ClinVar/MC3 intersection
+│   ├── 3.filter_crc_from_clinvar_mc3.sh   # CRC variant filtering
+│   ├── 4.filter_by_rsid_pathogenic.sh     # Pathogenic variant filter
+│   └── 5.annotate_allele_match.sh         # Allele match annotation
+│
+├── data/                                  # Processed TCGA & reference data
+│   ├── coad_metadata.csv                  # COAD clinical metadata
+│   ├── coad_mut_data.csv                  # Main mutation data (START HERE!)
+│   ├── coad_mutation_rates.csv            # Mutation rate summaries
+│   ├── coad_subtype_data.csv              # Molecular subtypes
+│   │
+│   ├── younger_subset_coad_mut_data.csv   # Age-stratified data (≤50 years)
+│   ├── older_subset_coad_mut_data.csv     # Age-stratified data (>50 years)
+│   ├── younger_subset_coad_mutation_rates.csv
+│   ├── older_subset_coad_mutation_rates.csv
+│   │
+│   ├── clinically_sig_genes.csv           # Clinically significant genes
+│   ├── gene_0.02thr_HR_pval.csv           # Genes with HR/p-value thresholds
+│   ├── human_canonical_pways.csv          # Canonical pathways
+│   ├── tcga_clinvar_maf.csv               # TCGA-ClinVar intersection
+│   │
+│   ├── TCGA-CDR-SupplementalTableS1.xlsx  # TCGA Clinical Data Resource
+│   ├── TCGASubtype.20170308.tsv           # PanCanAtlas subtypes
+│   ├── data_cleaning.R                    # Data processing script
+│   ├── tcga_maf_filter_binary.Rds         # Binary R data object
+│   └── neptune_csv/                       # Neptune graph database exports
+│
+└── tcga_survival_analysis_pseudocode.R    # Survival analysis workflow template
+```
