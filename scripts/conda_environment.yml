@@ -1,0 +1,25 @@
+name: base
+channels:
+  - defaults
+dependencies:
+  - python
+  - conda=25.9.0
+  - setuptools
+  - pip
+  - wheel
+  - conda-anaconda-telemetry[version='>=0.3.0']
+  - conda-anaconda-tos[version='>=0.2.2']
+  - conda-content-trust
+  - conda-libmamba-solver
+  - menuinst
+  - anaconda-anon-usage
+  - anaconda-auth
+  - radian
+  - r-base=4.3
+  - r-essentials
+  - htslib=1.20
+  - bedtools
+  - bcftools=1.20
+  - tmux
+  - git
+prefix: /home/ec2-user/miniconda3
