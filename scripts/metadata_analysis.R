@@ -190,7 +190,7 @@ survfit2(Surv(OS.time, as.numeric(vital_status))~older_than_50,data=meta_tibble)
        x="Time (Days)",
        color="Age")+
   add_pvalue("annotation") +  
-  scale_color_manual(values = c("#6CE5E8", "#31356E"))+
+  scale_color_manual(labels=c("<=50", ">50"),values = c("#6CE5E8", "#31356E"))+
   scale_fill_manual(values = c("#6CE5E8", "#31356E")) +
   theme(plot.title = element_text(hjust = 0.5, size = 18), 
         plot.background = element_rect(fill = "#F2F4F5"),
