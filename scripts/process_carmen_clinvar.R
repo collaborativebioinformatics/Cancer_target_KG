@@ -9,4 +9,4 @@ tt_wide <- tt %>%
   pivot_wider(id_cols = MC3_Sample, names_from = MC3_gene, values_from = MC3_gene, 
               values_fill = 0, values_fn = function(x) 1)
 
-write.csv(file=tt_wide, file="data/tcga_clinvar_maf.csv")
+write.csv(file=tt_wide, file="data/tcga_clinvar_maf.csv", row.names = FALSE)
