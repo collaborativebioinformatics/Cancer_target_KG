@@ -120,14 +120,14 @@ tcga_clinvar_maf.csv – Intersection of TCGA mutations with ClinVar pathogenic 
 ### Reference Files For AWS Neptune Knowledge Graph:
 
 ```
-\faLongArrowAltRight edges_has_gene_part001.csv     # Edge Tumor Sample -- Gene
-\faLongArrowAltRight edges_has_subtype.csv          # Edge Tumor Sample -- Tumor Subtype
-\faLongArrowAltRight edges_in_pathway.csv           # Edge Gene -- Pathway
-\faLongArrowAltRight edges_is_of_age.csv            # Edge Tumor Sample -- Age
-\faCircle vertices_age.csv               # Vertex Age
-\faCircle vertices_gene.csv              # Vertex Gene
-\faCircle vertices_sample.csv            # Vertex Sample
-\faCircle vertices_subtype.csv           # Vertex Tumor Subtype
+edges_has_gene_part001.csv     # Edge Tumor Sample -- Gene
+edges_has_subtype.csv          # Edge Tumor Sample -- Tumor Subtype
+edges_in_pathway.csv           # Edge Gene -- Pathway
+edges_is_of_age.csv            # Edge Tumor Sample -- Age
+vertices_age.csv               # Vertex Age
+vertices_gene.csv              # Vertex Gene
+vertices_sample.csv            # Vertex Sample
+vertices_subtype.csv           # Vertex Tumor Subtype
 ```
 
 ### Supplementary Files:
