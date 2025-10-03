@@ -117,6 +117,19 @@ human_canonical_pways.csv – Canonical biological pathways for functional enric
 tcga_clinvar_maf.csv – Intersection of TCGA mutations with ClinVar pathogenic variants
 ```
 
+### Reference Files For AWS Neptune Knowledge Graph:
+
+```
+\faLongArrowAltRight edges_has_gene_part001.csv     # Edge Tumor Sample -- Gene
+\faLongArrowAltRight edges_has_subtype.csv          # Edge Tumor Sample -- Tumor Subtype
+\faLongArrowAltRight edges_in_pathway.csv           # Edge Gene -- Pathway
+\faLongArrowAltRight edges_is_of_age.csv            # Edge Tumor Sample -- Age
+\faCircle vertices_age.csv               # Vertex Age
+\faCircle vertices_gene.csv              # Vertex Gene
+\faCircle vertices_sample.csv            # Vertex Sample
+\faCircle vertices_subtype.csv           # Vertex Tumor Subtype
+```
+
 ### Supplementary Files:
 
 ```
