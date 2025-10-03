@@ -145,6 +145,10 @@ Now go forth and discover some biomarkers! 🧬
 
 
 # Repository Structure
+## Key Directories
+* **Root directory** – Documentation, workflow diagrams, and the survival analysis pseudocode template.
+* **data/** – All the good stuff! Pre-processed TCGA colorectal cancer data, age-stratified subsets, reference gene lists, and pathway annotations. This is where the magic happens.
+* **scripts/** – Environment configurations and data processing pipeline scripts. Start with the conda environment files to set up your workspace.
 
 ```
 Cancer_target_KG/
