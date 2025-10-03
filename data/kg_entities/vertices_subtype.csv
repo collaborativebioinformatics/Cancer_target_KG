@@ -1,0 +1,5 @@
+~id,~label
+subtype:GI.CIN,Subtype
+subtype:GI.HM-indel,Subtype
+subtype:GI.GS,Subtype
+subtype:GI.HM-SNV,Subtype
