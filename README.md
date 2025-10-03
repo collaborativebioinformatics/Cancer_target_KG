@@ -166,8 +166,18 @@ Cancer_target_KG/
 │   ├── 3.filter_crc_from_clinvar_mc3.sh   # CRC variant filtering
 │   ├── 4.filter_by_rsid_pathogenic.sh     # Pathogenic variant filter
 │   └── 5.annotate_allele_match.sh         # Allele match annotation
+│   └── 6.survival-kg.ipynb                # Ipython notebook to build the Knowledge Graph
 │
 ├── data/                                  # Processed TCGA & reference data
+│   ├── neptune_csv/                       # Amazon Neptune Knowledge Graph formatted files
+│   │   ├── edges_has_gene_part001.csv     # Edge Tumor Sample -- Gene
+│   │   ├── edges_has_subtype.csv          # Edge Tumor Sample -- Tumor Subtype
+│   │   ├── edges_in_pathway.csv           # Edge Gene -- Pathway
+│   │   ├── edges_is_of_age.csv            # Edge Tumor Sample -- Age
+│   │   ├── vertices_age.csv               # Vertex Age
+│   │   ├── vertices_gene.csv              # Vertex Gene
+│   │   ├── vertices_sample.csv            # Vertex Sample
+│   │   ├── vertices_subtype.csv           # Vertex Tumor Subtype
 │   ├── coad_metadata.csv                  # COAD clinical metadata
 │   ├── coad_mut_data.csv                  # Main mutation data (START HERE!)
 │   ├── coad_mutation_rates.csv            # Mutation rate summaries
