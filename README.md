@@ -38,6 +38,8 @@ Age was stratified into two groups (≤50 and >50 years old), and hazard ratios 
 
 Genes with mutation frequency lower than 2% were dropped from the analysis set. We were particularly interested in identifying genes that exhibit differing HRs between age groups (≤50 vs >50 years old), as these may represent age-specific therapeutic targets.
 
+![Overview diagram](coad_survival_curve_by_age.png)
+
 ### CPTAC Validation and Enhancement
 We validated the TCGA-derived survival model in the independent CPTAC cohort using the same Cox proportional hazards modeling approach. Additionally, we constructed an enhanced model in CPTAC that incorporates both genetic markers and proteomic data to assess whether protein-level information improves survival prediction beyond genetic mutations alone.
 
